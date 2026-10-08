@@ -1,0 +1,102 @@
+[
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "GetAll",
+    "RelativePath": "api/v1/Devices",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "Create",
+    "RelativePath": "api/v1/Devices",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "device",
+        "Type": "pract6.Models.Device",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "Get",
+    "RelativePath": "api/v1/Devices/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "Put",
+    "RelativePath": "api/v1/Devices/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "device",
+        "Type": "pract6.Models.Device",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "Patch",
+    "RelativePath": "api/v1/Devices/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "device",
+        "Type": "pract6.Models.Device",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "pract6.Controllers.DevicesController",
+    "Method": "Delete",
+    "RelativePath": "api/v1/Devices/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
