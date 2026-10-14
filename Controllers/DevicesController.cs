@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 using pract6.Models;
 
@@ -17,11 +18,22 @@ namespace pract6.Controllers
         WebApiDatabaseContext db = new();
         public ObservableCollection<Device> devices { get; set; } = new();
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery] string? manufacture, [FromQuery] decimal? minPrice)
         {
             devices.Clear();
             foreach (var device in db.Devices.ToList())
+            {
+
+                if (!manufacture.IsNullOrEmpty() && device.Manufacturer != manufacture)
+                    continue;
+                if (minPrice >= 0 && device.Price <= minPrice)
+                    continue;
+
                 devices.Add(device);
+            }
+
+            if (devices.Count == 0)
+                return NotFound();
 
             return Ok(devices);
         }
@@ -44,6 +56,8 @@ namespace pract6.Controllers
         {
             if (device != null)
             {
+                if (device.Name == null || device.Price == null || device.Manufacturer == null || device.Quantity == null || device.IsActive == null)
+                    return BadRequest();
                 device.Id = 0;
                 db.Devices.Add(device);
                 db.SaveChanges();
@@ -57,40 +71,51 @@ namespace pract6.Controllers
         [HttpPut("{id:int}")]
         public IActionResult Put(int id, [FromBody] Device device)
         {
-            if (id != device.Id)
-            {
-                return BadRequest();
-            }
-            var existingDevice = db.Devices.FirstOrDefault(u => u.Id == device.Id);
+            var existingDevice = db.Devices.FirstOrDefault(u => u.Id == id);
             if (existingDevice != null)
             {
-                existingDevice.Name = device.Name;
-                existingDevice.Price = device.Price;
-                existingDevice.Manufacturer = device.Manufacturer;
-                existingDevice.Quantity = device.Quantity;
-                existingDevice.IsActive = device.IsActive;
-                db.SaveChanges();
-                return Ok(existingDevice);
+                try
+                {
+                    if (device.Name == null || device.Price == null || device.Manufacturer == null || device.Quantity == null || device.IsActive == null)
+                        return BadRequest();
+
+                    existingDevice.Name = device.Name;
+                    existingDevice.Price = device.Price;
+                    existingDevice.Manufacturer = device.Manufacturer;
+                    existingDevice.Quantity = device.Quantity;
+                    existingDevice.IsActive = device.IsActive;
+                    db.SaveChanges();
+                    return NoContent();
+                }
+                catch
+                {
+                    return BadRequest();
+                }
             }
             return NotFound();
         }
         [HttpPatch("{id:int}")]
         public IActionResult Patch(int id, [FromBody] Device device)
         {
-            if (id != device.Id)
-            {
+            if (device == null)
                 return BadRequest();
-            }
-            var existingDevice = db.Devices.FirstOrDefault(u => u.Id == device.Id);
+
+            var existingDevice = db.Devices.FirstOrDefault(u => u.Id == id);
             if (existingDevice != null)
             {
-                existingDevice.Name = device.Name;
-                existingDevice.Price = device.Price;
-                existingDevice.Manufacturer = device.Manufacturer;
-                existingDevice.Quantity = device.Quantity;
-                existingDevice.IsActive = device.IsActive;
+                if (device.Name != null)
+                    existingDevice.Name = device.Name;
+                if (device.Price != null)
+                    existingDevice.Price = device.Price;
+                if (device.Manufacturer != null)
+                    existingDevice.Manufacturer = device.Manufacturer;
+                if (device.Quantity != null)
+                    existingDevice.Quantity = device.Quantity;
+                if (device.IsActive != null)
+                    existingDevice.IsActive = device.IsActive;
                 db.SaveChanges();
-                return Ok(existingDevice);
+
+                return NoContent();
             }
             return NotFound();
         }

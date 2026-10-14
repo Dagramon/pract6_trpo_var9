@@ -144,3 +144,4 @@ C:\Users\st310-10\Desktop\karamov\pract6\obj\Debug\net8.0\refint\pract6.dll
 C:\Users\st310-10\Desktop\karamov\pract6\obj\Debug\net8.0\pract6.pdb
 C:\Users\st310-10\Desktop\karamov\pract6\obj\Debug\net8.0\pract6.genruntimeconfig.cache
 C:\Users\st310-10\Desktop\karamov\pract6\obj\Debug\net8.0\ref\pract6.dll
+C:\Users\st310-10\Desktop\karamov\pract6\obj\Debug\net8.0\pract6.sourcelink.json
