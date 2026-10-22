@@ -26,7 +26,7 @@ namespace pract6.Controllers
 
                 if (!manufacture.IsNullOrEmpty() && device.Manufacturer != manufacture)
                     continue;
-                if (minPrice >= 0 && device.Price <= minPrice)
+                if (minPrice >= 0 && device.Price < minPrice)
                     continue;
 
                 devices.Add(device);
