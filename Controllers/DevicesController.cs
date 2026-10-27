@@ -24,7 +24,7 @@ namespace pract6.Controllers
             foreach (var device in db.Devices.ToList())
             {
 
-                if (!manufacture.IsNullOrEmpty() && device.Manufacturer != manufacture)
+                if (!manufacture.IsNullOrEmpty() && !device.Manufacturer.StartsWith(manufacture))
                     continue;
                 if (minPrice >= 0 && device.Price < minPrice)
                     continue;
